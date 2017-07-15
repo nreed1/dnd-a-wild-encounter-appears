@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkLilac"
+    android:backgroundTint="@color/lilac"
+    android:visibility="visible"
+    android:orientation="vertical"
+    tools:context="com.example.nreed.awildencounterappears.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:drawable/bottom_bar"
+        android:elevation="4dp"
+        android:orientation="vertical">
+
+        <include layout="@layout/party_info" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/monsterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:layout_below="@+id/include"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:minHeight="104dp"
+            android:minWidth="30dp"
+            android:visibility="visible"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:elevation="4dp"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_verified_user_black_24dp"
+            android:scaleType="fitXY" />
+    </FrameLayout>
+
+</RelativeLayout>

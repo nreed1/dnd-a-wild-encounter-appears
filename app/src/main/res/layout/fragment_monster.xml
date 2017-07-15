@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:a="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    app:cardElevation="3dp"
+    app:contentPadding="10dp"
+    app:layout_goneMarginBottom="5dp"
+    android:layout_margin="5dp"
+    app:layout_collapseParallaxMultiplier="0.6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/monsterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="0.75"
+                    android:maxWidth="100dp"
+                    android:minWidth="100dp"
+                    android:text="Giant Wolf Spider"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    a:layout_alignParentRight="true" />
+
+                <TextView
+                    android:id="@+id/monsterCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="0.25"
+                    android:text="x2"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:theme="@style/Base.CardView"
+                    android:layout_weight=".25">
+
+                    <TextView
+                        android:id="@+id/monsterXP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:text="100XP"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <TextView
+                        android:id="@+id/monsterChallengeRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:layout_weight="1"
+                        android:maxWidth="50dp"
+                        android:minWidth="100dp"
+                        android:text="CR: 1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        a:layout_alignParentRight="true" />
+
+                </LinearLayout>
+
+                <include
+                    layout="@layout/heart_and_shield"
+                    android:layout_width="158dp"
+                    android:layout_height="45dp"
+                    android:layout_weight=".75" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
