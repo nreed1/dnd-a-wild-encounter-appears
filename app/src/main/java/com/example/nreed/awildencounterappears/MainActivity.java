@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements MonsterFragment.O
 
 
         try {
-            databaseHelper = new DatabaseHelper(getApplicationContext());
+            databaseHelper = DatabaseHelper.GetInstance(getApplicationContext());
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();
         }catch (Exception ex){
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements MonsterFragment.O
 
     private void setMainBackground() {
         Bitmap bitmap = getBitmap(this, R.drawable.ic_skulls);
+
         BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
         bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         RelativeLayout constraintLayout = (RelativeLayout) findViewById(R.id.mainConstraintLayout);

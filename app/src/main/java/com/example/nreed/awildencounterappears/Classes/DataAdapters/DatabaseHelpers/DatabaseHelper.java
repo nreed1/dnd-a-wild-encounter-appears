@@ -24,10 +24,18 @@ public class DatabaseHelper extends SQLiteOpenHelper
     private static final String DATABASE_NAME = "AWildEncounterAppears.db";
     private static final int DATABASE_VERSION = 2;
     private SQLiteDatabase myDataBase;
-
+    private static DatabaseHelper Instance=null;
     private final Context myContext;
 
-    public DatabaseHelper(Context context) {
+    public static DatabaseHelper GetInstance(Context context){
+        if(Instance == null){
+            Instance = new DatabaseHelper(context);
+        }
+        return Instance;
+    }
+
+
+    private DatabaseHelper(Context context) {
 
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         myContext=context;

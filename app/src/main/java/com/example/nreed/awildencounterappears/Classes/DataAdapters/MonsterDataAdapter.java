@@ -105,7 +105,7 @@ public class MonsterDataAdapter {
         MonsterList monsters = new MonsterList();
         if(xpPerMonster < 25) xpPerMonster = 25;
         try{
-            SQLiteDatabase monsterDatabase = MainActivity.databaseHelper.getReadableDatabase();
+            SQLiteDatabase monsterDatabase = DatabaseHelper.GetInstance(null).getReadableDatabase();
             String[] returnColumns = MonsterTable.AllColumns();
             String query = MonsterTable.COLUMN_CR + "<= ? and " + MonsterTable.COLUMN_XP +"<= ?";
             String[] arguments = {String.valueOf(partyLevel), String.valueOf(xpPerMonster)};//{String.valueOf(maxCR), String.valueOf(xp), "%"+environment+"%"};
