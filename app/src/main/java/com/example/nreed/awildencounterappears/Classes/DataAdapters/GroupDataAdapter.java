@@ -1,9 +1,11 @@
 package com.example.nreed.awildencounterappears.Classes.DataAdapters;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.Database.GroupTable;
+import com.example.nreed.awildencounterappears.Classes.DataAdapters.DatabaseHelpers.DatabaseHelper;
 import com.example.nreed.awildencounterappears.Classes.Objects.Group;
 import com.example.nreed.awildencounterappears.MainActivity;
 
@@ -16,6 +18,20 @@ import java.util.List;
 
 public class GroupDataAdapter {
 
+    public Boolean createGroup(Group newGroup){
+        try{
+            SQLiteDatabase database = DatabaseHelper.GetInstance(null).getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(GroupTable.COLUMN_GROUP_NAME,newGroup.getGroupName());
+            long insertId = database.insert(GroupTable.TABLE_GROUP,null, contentValues);
+            if(insertId>0) {
+                return true;
+            }
+        }catch (Exception ex){
+
+        }
+        return false;
+    }
     public List<Group> getGroups(){
         List<Group> groupList= new ArrayList<>();
 
@@ -41,10 +57,14 @@ public class GroupDataAdapter {
 
                 groupList.add(group);
             }
+            cursor.close();
         }catch (Exception e){
 
         }
 
         return groupList;
+    }
+    public Boolean deleteGroup(int groupId){
+        
     }
 }

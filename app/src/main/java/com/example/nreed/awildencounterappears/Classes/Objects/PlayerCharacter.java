@@ -9,7 +9,8 @@ public class PlayerCharacter {
     private String PlayerName;
     private int Level;
     private int ArmorClass;
-    private String Class;
+    private String DnDClass;
+    private int GroupId;
 
     public String getCharacterName() {
         return CharacterName;
@@ -43,5 +44,19 @@ public class PlayerCharacter {
         ArmorClass = armorClass;
     }
 
+    public String getDnDClass() {
+        return DnDClass;
+    }
 
+    public void setDnDClass(String dnDClass) {
+        DnDClass = dnDClass;
+    }
+
+    public int getGroupId() {
+        return GroupId;
+    }
+
+    public void setGroupId(int groupId) {
+        GroupId = groupId;
+    }
 }

@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements MonsterFragment.O
 
 
         try {
-            databaseHelper = new DatabaseHelper(getApplicationContext());
+            databaseHelper = DatabaseHelper.GetInstance(getApplicationContext());
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();
         }catch (Exception ex){
