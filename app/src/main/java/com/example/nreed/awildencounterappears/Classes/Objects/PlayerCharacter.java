@@ -5,12 +5,21 @@ package com.example.nreed.awildencounterappears.Classes.Objects;
  */
 
 public class PlayerCharacter {
+    private int Id;
     private String CharacterName;
     private String PlayerName;
     private int Level;
     private int ArmorClass;
     private String DnDClass;
     private int GroupId;
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
 
     public String getCharacterName() {
         return CharacterName;

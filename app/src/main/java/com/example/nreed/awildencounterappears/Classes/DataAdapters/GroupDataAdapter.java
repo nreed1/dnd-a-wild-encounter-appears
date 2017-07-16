@@ -64,7 +64,24 @@ public class GroupDataAdapter {
 
         return groupList;
     }
-    public Boolean deleteGroup(int groupId){
-        
+    /* Safely deletes the group and its players, if group has player they will need to have their
+    * group updated or be deleted themselves
+     * */
+    public Boolean deleteGroup(int groupId,Boolean andPlayers){
+        try{
+            if(andPlayers) {
+                //TODO player dataadapter delete call
+            }
+            SQLiteDatabase database = DatabaseHelper.GetInstance(null).getWritableDatabase();
+            String query = GroupTable.COLUMN_ID + "= ?";
+            String[] args ={String.valueOf(groupId)};
+            int deleted =database.delete(GroupTable.TABLE_GROUP, query,args);
+            if(deleted > 0){
+                return true;
+            }
+        }catch (Exception ex){
+
+        }
+        return false;
     }
 }
