@@ -5,13 +5,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -29,10 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.nreed.awildencounterappears.Classes.Calculators.XPCalculator;
@@ -43,7 +38,6 @@ import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
 import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MonsterFragment.OnListFragmentInteractionListener {
@@ -77,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mainDrawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -105,13 +99,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         partyXP = (TextView) findViewById(R.id.partyXP);
 
 
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CreateEncounter();
-            }
-        });
+      //  floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        //floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                CreateEncounter();
+//            }
+//        });
 
 
         try {
@@ -128,13 +122,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
         bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-        RelativeLayout constraintLayout = (RelativeLayout) findViewById(R.id.mainConstraintLayout);
+        DrawerLayout constraintLayout = (DrawerLayout) findViewById(R.id.mainDrawerLayout);
         constraintLayout.setBackgroundColor(Color.GREEN);
         constraintLayout.setBackground(bitmapDrawable);
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mainDrawerLayout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -184,7 +178,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mainDrawerLayout
+        );
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
