@@ -11,7 +11,7 @@
             <item
                 android:icon="@drawable/ic_warrior_fighting"
                 android:id="@+id/menuItemSettingsicon"
-      
+
                 android:title="Settings"></item>
             <item
                 android:icon="@drawable/sword"
