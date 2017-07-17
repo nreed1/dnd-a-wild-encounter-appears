@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <item
+        android:id="@+id/iconHamburger"
+        android:icon="@android:drawable/ic_input_get"
+        android:title="Other"
+        app:showAsAction="always"
+        >
+        <menu>
+            <item
+                android:icon="@drawable/ic_warrior_fighting"
+                android:id="@+id/menuItemSettingsicon"
+      
+                android:title="Settings"></item>
+            <item
+                android:icon="@drawable/sword"
+                android:id="@+id/menuItemWebsite"
+
+                android:title="Website / Status"></item>
+            <item
+                android:icon="@drawable/sword"
+                android:id="@+id/menuItemBugReporting"
+
+                android:title="Bug reporting"></item>
+            <item
+                android:icon="@drawable/sword"
+                android:id="@+id/menuItemBeer"
+
+                android:title="Settings"></item>
+
+        </menu>
+
+    </item>
+</menu>

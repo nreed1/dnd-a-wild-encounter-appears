@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nreed.awildencounterappears.Classes.Objects.Group;
-import com.example.nreed.awildencounterappears.dummy.DummyContent;
-import com.example.nreed.awildencounterappears.dummy.DummyContent.DummyItem;
 
 import java.util.ArrayList;
 import java.util.List;
