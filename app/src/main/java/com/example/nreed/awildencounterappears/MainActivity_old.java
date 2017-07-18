@@ -10,21 +10,20 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,8 +38,7 @@ import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MonsterFragment.OnListFragmentInteractionListener {
+public class MainActivity_old extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MonsterFragment.OnListFragmentInteractionListener {
     com.shawnlin.numberpicker.NumberPicker partyLevel = null;
     com.shawnlin.numberpicker.NumberPicker numberInParty = null;
     com.shawnlin.numberpicker.NumberPicker minCR = null;
@@ -54,15 +52,14 @@ public class MainActivity extends AppCompatActivity
 
     public static DatabaseHelper databaseHelper;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_old);
+        setMainBackground();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setMainBackground();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mainDrawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -80,7 +77,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
         additionalOptions =(LinearLayout) findViewById(R.id.additionalOptions);
         showAdditionalOptionsButton=(ImageButton) findViewById(R.id.showAdditionalOptionsButton);
@@ -101,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         partyXP = (TextView) findViewById(R.id.partyXP);
 
 
-        //  floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+      //  floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         //floatingActionButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -118,18 +114,19 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
+
     private void setMainBackground() {
         Bitmap bitmap = getBitmap(this, R.drawable.ic_skulls);
 
         BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
         bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-        DrawerLayout constraintLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout constraintLayout = (DrawerLayout) findViewById(R.id.mainDrawerLayout);
         constraintLayout.setBackgroundColor(Color.GREEN);
         constraintLayout.setBackground(bitmapDrawable);
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mainDrawerLayout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -137,12 +134,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity2, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main2, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

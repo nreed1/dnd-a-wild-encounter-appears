@@ -3,17 +3,14 @@ package com.example.nreed.awildencounterappears.Classes.DataAdapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 
-import com.example.nreed.awildencounterappears.Classes.Calculators.XPCalculator;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.Database.MonsterTable;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.DatabaseHelpers.DatabaseHelper;
-import com.example.nreed.awildencounterappears.Classes.MonsterMultiplier;
 import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
 import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
-import com.example.nreed.awildencounterappears.MainActivity;
+import com.example.nreed.awildencounterappears.MainActivity_old;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -147,7 +144,7 @@ public class MonsterDataAdapter {
         MonsterList monsters = new MonsterList();
         if(xpPerMonster < 25) xpPerMonster = 25;
         try{
-            SQLiteDatabase monsterDatabase = MainActivity.databaseHelper.getReadableDatabase();
+            SQLiteDatabase monsterDatabase = MainActivity_old.databaseHelper.getReadableDatabase();
             String[] returnColumns = MonsterTable.AllColumns();
             String query = MonsterTable.COLUMN_XP +"<= ? and " + MonsterTable.COLUMN_XP + ">= ?";
             String[] arguments = { String.valueOf(xpPerMonster), String.valueOf(xpPerMonster *1.1)};//{String.valueOf(maxCR), String.valueOf(xp), "%"+environment+"%"};

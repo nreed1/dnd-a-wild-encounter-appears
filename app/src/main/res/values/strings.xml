@@ -29,7 +29,7 @@
         <item>Hard</item>
         <item>Deadly</item>
     </string-array>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2">Random Encounter</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
