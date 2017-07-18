@@ -8,12 +8,10 @@ import android.widget.TextView;
 
 import com.example.nreed.awildencounterappears.Classes.Objects.Group;
 import com.example.nreed.awildencounterappears.GroupFragment.OnListFragmentInteractionListener;
-import com.example.nreed.awildencounterappears.dummy.DummyContent.DummyItem;
-
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Group} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */

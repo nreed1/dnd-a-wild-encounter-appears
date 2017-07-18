@@ -7,9 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.Database.GroupTable;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.Database.PlayerTable;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.DatabaseHelpers.DatabaseHelper;
-import com.example.nreed.awildencounterappears.Classes.Objects.Group;
 import com.example.nreed.awildencounterappears.Classes.Objects.PlayerCharacter;
-import com.example.nreed.awildencounterappears.MainActivity;
+import com.example.nreed.awildencounterappears.MainActivity_old;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class PlayerDataAdapter {
     public List<PlayerCharacter> getPlayersByGroup(int groupId){
         List<PlayerCharacter> playerCharacterList = new ArrayList<>();
         try{
-            SQLiteDatabase monsterDatabase = MainActivity.databaseHelper.getReadableDatabase();
+            SQLiteDatabase monsterDatabase = MainActivity_old.databaseHelper.getReadableDatabase();
             String[] returnColumns = PlayerTable.AllColumns();
             String query = PlayerTable.COLUMN_GROUPID +"= ?";
             String[] arguments = {String.valueOf(groupId)};

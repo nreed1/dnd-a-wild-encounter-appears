@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.Database.GroupTable;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.DatabaseHelpers.DatabaseHelper;
 import com.example.nreed.awildencounterappears.Classes.Objects.Group;
-import com.example.nreed.awildencounterappears.MainActivity;
+import com.example.nreed.awildencounterappears.MainActivity_old;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class GroupDataAdapter {
         List<Group> groupList= new ArrayList<>();
 
         try{
-            SQLiteDatabase monsterDatabase = MainActivity.databaseHelper.getReadableDatabase();
+            SQLiteDatabase monsterDatabase = MainActivity_old.databaseHelper.getReadableDatabase();
             String[] returnColumns = GroupTable.AllColumns();
             String query = "";
             String[] arguments = {};
