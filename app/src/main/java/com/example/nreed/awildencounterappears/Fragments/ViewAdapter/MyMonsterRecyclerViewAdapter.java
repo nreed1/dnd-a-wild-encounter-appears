@@ -1,4 +1,4 @@
-package com.example.nreed.awildencounterappears;
+package com.example.nreed.awildencounterappears.Fragments.ViewAdapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
-import com.example.nreed.awildencounterappears.MonsterFragment.OnListFragmentInteractionListener;
+import com.example.nreed.awildencounterappears.Fragments.MonsterFragment.OnListFragmentInteractionListener;
+import com.example.nreed.awildencounterappears.R;
 
 
 import java.util.ArrayList;

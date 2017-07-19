@@ -1,8 +1,8 @@
-package com.example.nreed.awildencounterappears;
+package com.example.nreed.awildencounterappears.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
-import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
+import com.example.nreed.awildencounterappears.Classes.Objects.PlayerCharacter;
+import com.example.nreed.awildencounterappears.Fragments.ViewAdapter.MyPlayerCharacterRecyclerViewAdapter;
+import com.example.nreed.awildencounterappears.R;
+
+import java.util.ArrayList;
+
 
 /**
  * A fragment representing a list of Items.
@@ -19,26 +23,26 @@ import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MonsterFragment extends Fragment {
+public class PlayerCharacterFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 2;
+    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    private MonsterList monsters;
+    private ArrayList<PlayerCharacter> playerCharacterList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MonsterFragment() {
+    public PlayerCharacterFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static MonsterFragment newInstance(int columnCount) {
-        MonsterFragment fragment = new MonsterFragment();
+    public static PlayerCharacterFragment newInstance(int columnCount) {
+        PlayerCharacterFragment fragment = new PlayerCharacterFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -51,15 +55,13 @@ public class MonsterFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-            monsters = (MonsterList) getArguments().getParcelable("monsters");
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_monster_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_playercharacter_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -70,7 +72,7 @@ public class MonsterFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyMonsterRecyclerViewAdapter(monsters, mListener));
+            recyclerView.setAdapter(new MyPlayerCharacterRecyclerViewAdapter(playerCharacterList, mListener));
         }
         return view;
     }
@@ -105,6 +107,6 @@ public class MonsterFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Monster item);
+        void onListFragmentInteraction(PlayerCharacter item);
     }
 }

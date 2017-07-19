@@ -7,7 +7,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.nreed.awildencounterappears.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/content">
     <LinearLayout
         android:id="@+id/include"
         android:layout_width="match_parent"

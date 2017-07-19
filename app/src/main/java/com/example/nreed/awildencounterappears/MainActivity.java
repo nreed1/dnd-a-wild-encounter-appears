@@ -1,21 +1,14 @@
 package com.example.nreed.awildencounterappears;
 
-import android.annotation.TargetApi;
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -32,10 +25,12 @@ import android.widget.TextView;
 import com.example.nreed.awildencounterappears.Classes.Calculators.XPCalculator;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.DatabaseHelpers.DatabaseHelper;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.MonsterDataAdapter;
+import com.example.nreed.awildencounterappears.Classes.Helpers.BitmapHelper;
 import com.example.nreed.awildencounterappears.Classes.MonsterMultiplier;
 import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
 import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
+import com.example.nreed.awildencounterappears.Fragments.MonsterFragment;
 
 import java.util.Random;
 
@@ -111,14 +106,27 @@ public class MainActivity extends AppCompatActivity
         }
     }
     private void setMainBackground() {
-        Bitmap bitmap = getBitmap(this, R.drawable.ic_skulls);
+        Bitmap bitmap = BitmapHelper.getBitmap(this, R.drawable.ic_skulls);
 
         BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
         bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+
         DrawerLayout constraintLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         constraintLayout.setBackgroundColor(Color.GREEN);
         constraintLayout.setBackground(bitmapDrawable);
     }
+
+    private void setNavDrawerBackground(){
+        Bitmap bitmap = BitmapHelper.getBitmap(this, R.drawable.ic_skulls);
+
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
+        bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+
+        DrawerLayout constraintLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        constraintLayout.setBackgroundColor(Color.GREEN);
+        constraintLayout.setBackground(bitmapDrawable);
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -164,12 +172,19 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_saved_encounter) {
 
         } else if (id == R.id.nav_settings) {
-
+            startSettingsActivity();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void startSettingsActivity(){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+
     public void SetPartyXP(double xp){
         partyXP.setText(String.valueOf(xp));
     }
@@ -221,23 +236,5 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private static Bitmap getBitmap(VectorDrawable vectorDrawable) {
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        vectorDrawable.draw(canvas);
-        return bitmap;
-    }
-    private static Bitmap getBitmap(Context context, int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        } else if (drawable instanceof VectorDrawable) {
-            return getBitmap((VectorDrawable) drawable);
-        } else {
-            throw new IllegalArgumentException("unsupported drawable type");
-        }
-    }
+
 }
