@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="Fight!">
+            <menu>
+        <item
+            android:id="@+id/nav_random"
+            android:icon="@drawable/ic_warrior_fighting"
+            android:title="Random Encounter" />
+
+        </menu>
+        </item>
+        <item android:title="Looking for Group (Management)">
+            <menu>
+                <item
+                    android:id="@+id/nav_groups"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Groups" />
+
+            </menu>
+        </item>
+        <item android:title="Encounters">
+            <menu>
+                <item
+                    android:id="@+id/nav_saved_encounter"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Saved Encounters" />
+
+            </menu>
+        </item>
+    </group>
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="Settings" />
+
+        </menu>
+    </item>
+
+</menu>

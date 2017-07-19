@@ -1,4 +1,4 @@
-package com.example.nreed.awildencounterappears;
+package com.example.nreed.awildencounterappears.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nreed.awildencounterappears.Classes.Objects.Group;
+import com.example.nreed.awildencounterappears.Fragments.ViewAdapter.MyGroupRecyclerViewAdapter;
+import com.example.nreed.awildencounterappears.R;
 
 import java.util.ArrayList;
 import java.util.List;
