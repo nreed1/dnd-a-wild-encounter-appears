@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity
         bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
         DrawerLayout constraintLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        constraintLayout.setBackgroundColor(Color.GREEN);
         constraintLayout.setBackground(bitmapDrawable);
     }
 
