@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                CreateEncounter();
+                //Snackbar.make(view, "Creating Encounter", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
             }
         });
 
@@ -101,14 +101,6 @@ public class MainActivity extends AppCompatActivity
         partyXP = (TextView) findViewById(R.id.partyXP);
 
 
-        //  floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        //floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                CreateEncounter();
-//            }
-//        });
-
 
         try {
             databaseHelper = DatabaseHelper.GetInstance(getApplicationContext());
@@ -140,7 +132,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity2, menu);
+        getMenuInflater().inflate(R.menu.main_activity, menu);
         return true;
     }
 
@@ -165,22 +157,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_random) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_groups) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_saved_encounter) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_settings) {
 
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mainDrawerLayout
-        );
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -244,13 +230,6 @@ public class MainActivity extends AppCompatActivity
         vectorDrawable.draw(canvas);
         return bitmap;
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.mainhamburgermenu, menu);
-//        return true;
-//    }
-
     private static Bitmap getBitmap(Context context, int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
         if (drawable instanceof BitmapDrawable) {

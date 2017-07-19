@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.Database.XPThresholdsByCharacterTable;
 import com.example.nreed.awildencounterappears.Classes.Objects.XPThresholdByCharacterLevel;
-import com.example.nreed.awildencounterappears.MainActivity_old;
+import com.example.nreed.awildencounterappears.MainActivity;
 
 /**
  * Created by nreed on 7/7/2017.
@@ -25,7 +25,7 @@ public class XPThresholdByCharacterDataAdapter {
     public XPThresholdByCharacterLevel GetXPThresholdByCharacterLevel(int level){
         XPThresholdByCharacterLevel xpThresholdByCharacterLevel=null;
         try{
-            SQLiteDatabase xpThresholdDatabase = MainActivity_old.databaseHelper.getReadableDatabase();
+            SQLiteDatabase xpThresholdDatabase = MainActivity.databaseHelper.getReadableDatabase();
             String[] returnColumns = XPThresholdsByCharacterTable.AllColumns();
             String query = XPThresholdsByCharacterTable.COLUMN_LEVEL + "= ?";
             String[] arguments = {String.valueOf(level)};

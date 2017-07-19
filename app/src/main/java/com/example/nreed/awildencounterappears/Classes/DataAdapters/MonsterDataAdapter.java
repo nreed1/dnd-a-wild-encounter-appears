@@ -10,7 +10,7 @@ import com.example.nreed.awildencounterappears.Classes.DataAdapters.DatabaseHelp
 import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
 import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
-import com.example.nreed.awildencounterappears.MainActivity_old;
+import com.example.nreed.awildencounterappears.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -144,7 +144,7 @@ public class MonsterDataAdapter {
         MonsterList monsters = new MonsterList();
         if(xpPerMonster < 25) xpPerMonster = 25;
         try{
-            SQLiteDatabase monsterDatabase = MainActivity_old.databaseHelper.getReadableDatabase();
+            SQLiteDatabase monsterDatabase = MainActivity.databaseHelper.getReadableDatabase();
             String[] returnColumns = MonsterTable.AllColumns();
             String query = MonsterTable.COLUMN_XP +"<= ? and " + MonsterTable.COLUMN_XP + ">= ?";
             String[] arguments = { String.valueOf(xpPerMonster), String.valueOf(xpPerMonster *1.1)};//{String.valueOf(maxCR), String.valueOf(xp), "%"+environment+"%"};
