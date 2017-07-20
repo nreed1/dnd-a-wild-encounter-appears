@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/cardview_light_background">
+    android:background="@color/cardview_dark_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,7 +64,7 @@
             android:layout_row="1"
             android:layout_weight="1.00"
             android:maxWidth="50dp"
-            android:text="Number of Party Members"
+            android:text="@string/number_of_party_members"
             android:textAlignment="center"
             android:textColor="@color/skull_color"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -148,7 +148,7 @@
                 android:maxWidth="50dp"
                 android:minHeight="53dp"
 
-                android:text="Min Challenge Rating"
+                android:text="@string/min_challenge_rating"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 

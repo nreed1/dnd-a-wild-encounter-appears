@@ -97,7 +97,7 @@ public class MonsterDataAdapter {
     }
 
     @NonNull
-    public MonsterList getMonstersFromTable(int partyLevel, double xpPerMonster) {
+    private MonsterList getMonstersFromTable(int partyLevel, double xpPerMonster) {
 
         MonsterList monsters = new MonsterList();
         if(xpPerMonster < 25) xpPerMonster = 25;
@@ -198,5 +198,31 @@ public class MonsterDataAdapter {
         Monster monster =new Monster();
         monster = _monsters.getByClosestXP(Math.ceil(remainingXP/numberToSelect));
         return monster;
+    }
+
+
+    public ArrayList<String> getSourcesList(){
+        ArrayList<String> sources = new ArrayList<>();
+        try{
+            SQLiteDatabase database = DatabaseHelper.GetInstance(null).getReadableDatabase();
+            String[] returnColumns = {MonsterTable.COLUMN_SOURCES};
+            String query = "";
+            String[] arguments = {};
+            Boolean getDistinct =true;
+            Cursor cursor = database.query(getDistinct, MonsterTable.TABLE_MONSTER, returnColumns, query, arguments,
+                    null,
+                    null,
+                    null,
+                    null);
+            while(cursor.moveToNext()){
+                sources.add(cursor.getString(cursor.getColumnIndex(MonsterTable.COLUMN_SOURCES)));
+            }
+            cursor.close();
+
+            return sources;
+        }catch (Exception ex){
+
+        }
+        return new ArrayList<>();
     }
 }

@@ -55,7 +55,7 @@ public class PlayerDataAdapter {
     public List<PlayerCharacter> getPlayersByGroup(int groupId){
         List<PlayerCharacter> playerCharacterList = new ArrayList<>();
         try{
-            SQLiteDatabase monsterDatabase = MainActivity.databaseHelper.getReadableDatabase();
+            SQLiteDatabase monsterDatabase = DatabaseHelper.GetInstance(null).getReadableDatabase();
             String[] returnColumns = PlayerTable.AllColumns();
             String query = PlayerTable.COLUMN_GROUPID +"= ?";
             String[] arguments = {String.valueOf(groupId)};

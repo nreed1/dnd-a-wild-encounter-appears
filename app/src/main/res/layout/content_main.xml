@@ -9,42 +9,6 @@
     tools:showIn="@layout/app_bar_main"
     android:orientation="vertical"
     android:id="@+id/content">
-    <LinearLayout
-        android:id="@+id/include"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@android:drawable/bottom_bar"
-        android:elevation="4dp"
-        android:orientation="vertical">
-
-        <include layout="@layout/party_info" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/monsterLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-
-        android:layout_below="@+id/include"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true">
-
-
-    </FrameLayout>
 
 
 
