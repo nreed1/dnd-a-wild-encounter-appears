@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#dfdbe5</color>
-    <color name="colorPrimaryDark">#9c92ac</color>
-    <color name="colorAccent">#ff4081</color>
+    <color name="colorPrimary">#f44336</color>
+    <color name="colorPrimaryDark">#d32f2f</color>
+    <color name="colorAccent">#00b8d4</color>
     <color name="lilac">#dfdbe5</color>
     <color name="darkLilac">#9c92ac</color>
     <color name="colorPrimary_blue">#3f51b5</color>
     <color name="colorPrimaryDark_blue">#303f9f</color>
     <color name="colorAccent_pink">#ff4081</color>
+    <color name="skull_color">#9E9E9E</color>
 </resources>

@@ -31,6 +31,7 @@ import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
 import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
 import com.example.nreed.awildencounterappears.Fragments.MonsterFragment;
+import com.example.nreed.awildencounterappears.Fragments.SettingsFragment;
 
 import java.util.Random;
 
@@ -112,7 +113,6 @@ public class MainActivity extends AppCompatActivity
         bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
         DrawerLayout constraintLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        constraintLayout.setBackgroundColor(Color.GREEN);
         constraintLayout.setBackground(bitmapDrawable);
     }
 
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_saved_encounter) {
 
         } else if (id == R.id.nav_settings) {
-            startSettingsActivity();
+            startSettingsFragment();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -182,6 +182,14 @@ public class MainActivity extends AppCompatActivity
     private void startSettingsActivity(){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    private void startSettingsFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        SettingsFragment settingsFragment = new SettingsFragment();
+        fragmentTransaction.replace(R.id.content, settingsFragment, "Settings");
+        fragmentTransaction.commit();
     }
 
 

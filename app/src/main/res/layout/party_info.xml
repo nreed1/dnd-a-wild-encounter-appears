@@ -27,6 +27,7 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:visibility="visible"
+            android:textColor="@color/skull_color"
             tools:text="Level Of Party" />
 
         <com.shawnlin.numberpicker.NumberPicker
@@ -65,6 +66,7 @@
             android:maxWidth="50dp"
             android:text="Number of Party Members"
             android:textAlignment="center"
+            android:textColor="@color/skull_color"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:visibility="visible" />
 
@@ -119,6 +121,7 @@
             android:text="Party XP"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/skull_color"
             android:visibility="visible" />
 
     </RelativeLayout>
