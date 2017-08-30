@@ -3,12 +3,25 @@ package com.example.nreed.awildencounterappears.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.nreed.awildencounterappears.Classes.Calculators.XPCalculator;
+import com.example.nreed.awildencounterappears.Classes.DataAdapters.MonsterDataAdapter;
+import com.example.nreed.awildencounterappears.Classes.MonsterMultiplier;
+import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
+import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.R;
+
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +36,19 @@ public class RandomEncounterFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    com.shawnlin.numberpicker.NumberPicker partyLevel = null;
+    com.shawnlin.numberpicker.NumberPicker numberInParty = null;
+    com.shawnlin.numberpicker.NumberPicker minCR = null;
+    FloatingActionButton floatingActionButton = null;
+
+    LinearLayout additionalOptions =null;
+    ImageButton showAdditionalOptionsButton =null;
+
+    TextView partyXP = null;
+    TextView monstersToKill = null;
+    LinearLayout monsterLayout= null;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +91,37 @@ public class RandomEncounterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_random_encounter, container, false);
+        View view = inflater.inflate(R.layout.fragment_random_encounter, container, false);
+        additionalOptions =(LinearLayout) view.findViewById(R.id.additionalOptions);
+        showAdditionalOptionsButton=(ImageButton) view.findViewById(R.id.showAdditionalOptionsButton);
+        showAdditionalOptionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(additionalOptions.getVisibility() == View.GONE) {
+                    additionalOptions.setVisibility(View.VISIBLE);
+                    showAdditionalOptionsButton.setRotation(180);
+                }else {
+                    additionalOptions.setVisibility(View.GONE);
+                    showAdditionalOptionsButton.setRotation(0);
+                }
+            }
+        });
+        partyLevel = (com.shawnlin.numberpicker.NumberPicker)view.findViewById(R.id.levelOfPartyNumberPicker);
+        numberInParty = (com.shawnlin.numberpicker.NumberPicker) view.findViewById(R.id.numberOfMembers);
+        partyXP = (TextView) view.findViewById(R.id.partyXP);
+        monsterLayout =(LinearLayout) view.findViewById(R.id.monsterLayout);
+
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        if(fab != null) {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CreateEncounter();
+                    //Snackbar.make(view, "Creating Encounter", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                }
+            });
+        }
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -74,6 +130,45 @@ public class RandomEncounterFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+    private void CreateEncounter(){
+        XPCalculator calculator = new XPCalculator(DifficultyEnum.Easy);
+        int partyLevelInt =partyLevel.getValue();
+        int partyMembersInt = numberInParty.getValue();
+
+        Random randomSelect = new Random();
+        int randomMonsterHorde = randomSelect.nextInt(partyLevelInt+1);
+
+        double initialXPPool = calculator.CalculatePartyXP(partyMembersInt, partyLevelInt, MonsterMultiplier.GetMonsterMultiplier(randomMonsterHorde,partyMembersInt));
+
+
+
+        MonsterDataAdapter monsterDataAdapter = new MonsterDataAdapter(this.getContext());
+        MonsterList monsters = monsterDataAdapter.GetMonsterList("cave", partyLevelInt, initialXPPool, randomMonsterHorde, partyMembersInt, partyLevelInt,DifficultyEnum.Easy);
+
+        if(monsters == null) return;
+
+        if(!monsters.isEmpty()){
+            ShowMonsterList(monsters);
+        }else{
+
+            monsterLayout.removeAllViews();
+        }
+    }
+
+    private void ShowMonsterList(MonsterList monsters) {
+
+        MonsterFragment monsterFragment = new MonsterFragment();
+        Bundle b = new Bundle();
+        b.putParcelable("monsters", monsters);
+        monsterFragment.setArguments(b);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.monsterLayout,monsterFragment,"fragment1");
+        fragmentTransaction.commit();
+    }
+
 
     @Override
     public void onAttach(Context context) {

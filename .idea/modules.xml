@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AWildEncounterAppears.iml" filepath="$PROJECT_DIR$/AWildEncounterAppears.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dnd-a-wild-encounter-appears.iml" filepath="$PROJECT_DIR$/dnd-a-wild-encounter-appears.iml" />
     </modules>
   </component>
 </project>

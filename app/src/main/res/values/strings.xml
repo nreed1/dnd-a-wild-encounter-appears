@@ -29,7 +29,7 @@
         <item>Hard</item>
         <item>Deadly</item>
     </string-array>
-    <string name="title_activity_main2">Random Encounter</string>
+    <string name="title_activity_main2">A Wild Enounter Appears!</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -111,4 +111,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="group_management">Looking for Group (Management)</string>
+    <string name="number_of_party_members">Number of Party Members</string>
+    <string name="min_challenge_rating">Min Challenge Rating</string>
 </resources>

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -28,29 +29,26 @@ import com.example.nreed.awildencounterappears.Classes.DataAdapters.MonsterDataA
 import com.example.nreed.awildencounterappears.Classes.Helpers.BitmapHelper;
 import com.example.nreed.awildencounterappears.Classes.MonsterMultiplier;
 import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
+import com.example.nreed.awildencounterappears.Classes.Objects.Group;
 import com.example.nreed.awildencounterappears.Classes.Objects.Lists.MonsterList;
 import com.example.nreed.awildencounterappears.Classes.Objects.Monster;
+import com.example.nreed.awildencounterappears.Classes.Objects.PlayerCharacter;
+import com.example.nreed.awildencounterappears.Fragments.GroupFragment;
 import com.example.nreed.awildencounterappears.Fragments.MonsterFragment;
+import com.example.nreed.awildencounterappears.Fragments.PlayerCharacterFragment;
+import com.example.nreed.awildencounterappears.Fragments.RandomEncounterFragment;
 import com.example.nreed.awildencounterappears.Fragments.SettingsFragment;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MonsterFragment.OnListFragmentInteractionListener {
-    com.shawnlin.numberpicker.NumberPicker partyLevel = null;
-    com.shawnlin.numberpicker.NumberPicker numberInParty = null;
-    com.shawnlin.numberpicker.NumberPicker minCR = null;
-    FloatingActionButton floatingActionButton = null;
-
-    LinearLayout additionalOptions =null;
-    ImageButton showAdditionalOptionsButton =null;
-
-    TextView partyXP = null;
-    TextView monstersToKill = null;
+        implements NavigationView.OnNavigationItemSelectedListener, MonsterFragment.OnListFragmentInteractionListener,
+        SettingsFragment.OnFragmentInteractionListener,
+        RandomEncounterFragment.OnFragmentInteractionListener,
+        GroupFragment.OnListFragmentInteractionListener,
+        PlayerCharacterFragment.OnListFragmentInteractionListener{
 
     public static DatabaseHelper databaseHelper;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +57,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setMainBackground();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CreateEncounter();
-                //Snackbar.make(view, "Creating Encounter", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -77,27 +68,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        additionalOptions =(LinearLayout) findViewById(R.id.additionalOptions);
-        showAdditionalOptionsButton=(ImageButton) findViewById(R.id.showAdditionalOptionsButton);
-        showAdditionalOptionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(additionalOptions.getVisibility() == View.GONE) {
-                    additionalOptions.setVisibility(View.VISIBLE);
-                    showAdditionalOptionsButton.setRotation(180);
-                }else {
-                    additionalOptions.setVisibility(View.GONE);
-                    showAdditionalOptionsButton.setRotation(0);
-                }
-            }
-        });
-        partyLevel = (com.shawnlin.numberpicker.NumberPicker)findViewById(R.id.levelOfPartyNumberPicker);
-        numberInParty = (com.shawnlin.numberpicker.NumberPicker) findViewById(R.id.numberOfMembers);
-        partyXP = (TextView) findViewById(R.id.partyXP);
-
-
-
         try {
             databaseHelper = DatabaseHelper.GetInstance(getApplicationContext());
             databaseHelper.createDataBase();
@@ -105,6 +75,8 @@ public class MainActivity extends AppCompatActivity
         }catch (Exception ex){
 
         }
+
+        startRandomEncounterFragment();
     }
     private void setMainBackground() {
         Bitmap bitmap = BitmapHelper.getBitmap(this, R.drawable.ic_skulls);
@@ -166,9 +138,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_random) {
-            // Handle the camera action
-        } else if (id == R.id.nav_groups) {
+            startRandomEncounterFragment();
 
+        } else if (id == R.id.nav_groups) {
+            startGroupFragment();
         } else if (id == R.id.nav_saved_encounter) {
 
         } else if (id == R.id.nav_settings) {
@@ -179,11 +152,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void startSettingsActivity(){
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
     private void startSettingsFragment(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -192,52 +160,22 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-
-    public void SetPartyXP(double xp){
-        partyXP.setText(String.valueOf(xp));
-    }
-
-
-    private void CreateEncounter(){
-        XPCalculator calculator = new XPCalculator(DifficultyEnum.Easy);
-        int partyLevelInt =partyLevel.getValue();
-        int partyMembersInt = numberInParty.getValue();
-
-        Random randomSelect = new Random();
-        int randomMonsterHorde = randomSelect.nextInt(partyLevelInt+1);
-
-        double initialXPPool = calculator.CalculatePartyXP(partyMembersInt, partyLevelInt, MonsterMultiplier.GetMonsterMultiplier(randomMonsterHorde,partyMembersInt));
-        partyXP.setText(String.valueOf(initialXPPool));
-
-
-
-        MonsterDataAdapter monsterDataAdapter = new MonsterDataAdapter(getApplicationContext());
-        MonsterList monsters = monsterDataAdapter.GetMonsterList("cave", partyLevelInt, initialXPPool, randomMonsterHorde, partyMembersInt, partyLevelInt,DifficultyEnum.Easy);
-
-        if(monsters == null) return;
-        partyXP.setText("Total XP: " + String.valueOf(monsterDataAdapter.XP));
-
-        if(!monsters.isEmpty()){
-            ShowMonsterList(monsters);
-        }else{
-            LinearLayout linearLayout= (LinearLayout) findViewById(R.id.monsterLayout);
-            linearLayout.removeAllViews();
-        }
-    }
-
-    private void ShowMonsterList(MonsterList monsters) {
-        LinearLayout linearLayout= (LinearLayout) findViewById(R.id.monsterLayout);
-
-        MonsterFragment monsterFragment = new MonsterFragment();
-        Bundle b = new Bundle();
-        b.putParcelable("monsters", monsters);
-        monsterFragment.setArguments(b);
-
+    private void startRandomEncounterFragment(){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-        fragmentTransaction.replace(linearLayout.getId(),monsterFragment,"fragment1");
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        RandomEncounterFragment randomEncounterFragment = new RandomEncounterFragment();
+        fragmentTransaction.replace(R.id.content, randomEncounterFragment, "RandomEncounter");
         fragmentTransaction.commit();
     }
+
+    private void startGroupFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        GroupFragment groupFragment = new GroupFragment();
+        fragmentTransaction.replace(R.id.content, groupFragment, "GroupFragment");
+        fragmentTransaction.commit();
+    }
+
 
     @Override
     public void onListFragmentInteraction(Monster item) {
@@ -245,4 +183,18 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Group item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(PlayerCharacter item) {
+
+    }
 }

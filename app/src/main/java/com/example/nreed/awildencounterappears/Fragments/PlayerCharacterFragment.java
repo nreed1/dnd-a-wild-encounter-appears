@@ -2,7 +2,7 @@ package com.example.nreed.awildencounterappears.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,8 +27,10 @@ public class PlayerCharacterFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String ARG_GROUP_ID = "groupid";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private int mGroupId = 0;
     private OnListFragmentInteractionListener mListener;
     private ArrayList<PlayerCharacter> playerCharacterList;
 
@@ -41,10 +43,11 @@ public class PlayerCharacterFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static PlayerCharacterFragment newInstance(int columnCount) {
+    public static PlayerCharacterFragment newInstance(int columnCount, int groupId) {
         PlayerCharacterFragment fragment = new PlayerCharacterFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(ARG_GROUP_ID, groupId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,6 +58,7 @@ public class PlayerCharacterFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mGroupId =getArguments().getInt(ARG_GROUP_ID);
         }
     }
 
