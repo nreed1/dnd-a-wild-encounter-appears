@@ -88,4 +88,38 @@ public class PlayerDataAdapter {
         }
         return playerCharacterList;
     }
+    public PlayerCharacter getPlayerById(int playerId){
+        PlayerCharacter playerCharacter = null;
+        try{
+            SQLiteDatabase monsterDatabase = DatabaseHelper.GetInstance(null).getReadableDatabase();
+            String[] returnColumns = PlayerTable.AllColumns();
+            String query = PlayerTable.COLUMN_ID +"= ?";
+            String[] arguments = {String.valueOf(playerId)};
+
+
+            Cursor cursor = monsterDatabase.query(GroupTable.TABLE_GROUP,
+                    returnColumns,
+                    query,
+                    arguments,
+                    null,
+                    null,
+                    null );
+
+            while(cursor.moveToNext()){
+                playerCharacter = new PlayerCharacter();
+                playerCharacter.setId(cursor.getInt(cursor.getColumnIndex(PlayerTable.COLUMN_ID)));
+                playerCharacter.setLevel(cursor.getInt(cursor.getColumnIndex(PlayerTable.COLUMN_LEVEL)));
+                playerCharacter.setCharacterName(cursor.getString(cursor.getColumnIndex(PlayerTable.COLUMN_CHARACTER_NAME)));
+                playerCharacter.setGroupId(cursor.getInt(cursor.getColumnIndex(PlayerTable.COLUMN_GROUPID)));
+                playerCharacter.setDnDClass(cursor.getString(cursor.getColumnIndex(PlayerTable.COLUMN_CLASS)));
+                playerCharacter.setArmorClass(cursor.getInt(cursor.getColumnIndex(PlayerTable.COLUMN_AC)));
+                playerCharacter.setPlayerName(cursor.getString(cursor.getColumnIndex(PlayerTable.COLUMN_PLAYER_NAME)));
+
+            }
+            cursor.close();
+        }catch (Exception e){
+
+        }
+        return playerCharacter;
+    }
 }

@@ -7,6 +7,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,7 +26,9 @@ import android.widget.TextView;
 
 import com.example.nreed.awildencounterappears.Classes.Calculators.XPCalculator;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.DatabaseHelpers.DatabaseHelper;
+import com.example.nreed.awildencounterappears.Classes.DataAdapters.GroupDataAdapter;
 import com.example.nreed.awildencounterappears.Classes.DataAdapters.MonsterDataAdapter;
+import com.example.nreed.awildencounterappears.Classes.DataAdapters.PlayerDataAdapter;
 import com.example.nreed.awildencounterappears.Classes.Helpers.BitmapHelper;
 import com.example.nreed.awildencounterappears.Classes.MonsterMultiplier;
 import com.example.nreed.awildencounterappears.Classes.Objects.DifficultyEnum;
@@ -36,9 +39,11 @@ import com.example.nreed.awildencounterappears.Classes.Objects.PlayerCharacter;
 import com.example.nreed.awildencounterappears.Fragments.GroupFragment;
 import com.example.nreed.awildencounterappears.Fragments.MonsterFragment;
 import com.example.nreed.awildencounterappears.Fragments.PlayerCharacterFragment;
+import com.example.nreed.awildencounterappears.Fragments.PlayerListFragment;
 import com.example.nreed.awildencounterappears.Fragments.RandomEncounterFragment;
 import com.example.nreed.awildencounterappears.Fragments.SettingsFragment;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
@@ -46,7 +51,8 @@ public class MainActivity extends AppCompatActivity
         SettingsFragment.OnFragmentInteractionListener,
         RandomEncounterFragment.OnFragmentInteractionListener,
         GroupFragment.OnListFragmentInteractionListener,
-        PlayerCharacterFragment.OnListFragmentInteractionListener{
+        PlayerCharacterFragment.OnListFragmentInteractionListener,
+        PlayerListFragment.OnListFragmentInteractionListener{
 
     public static DatabaseHelper databaseHelper;
 
@@ -172,7 +178,35 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         GroupFragment groupFragment = new GroupFragment();
+        Bundle b = new Bundle();
+        GroupDataAdapter groupDataAdapter = new GroupDataAdapter();
+        b.putParcelableArrayList("grouplist", new ArrayList<Group>(groupDataAdapter.getGroups()));
+        groupFragment.setArguments(b);
         fragmentTransaction.replace(R.id.content, groupFragment, "GroupFragment");
+        fragmentTransaction.commit();
+    }
+
+    private void startPlayerGroupFragment(int groupId){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        PlayerListFragment playerListFragment = new PlayerListFragment();
+        Bundle b = new Bundle();
+        PlayerDataAdapter playerDataAdapter = new PlayerDataAdapter();
+        b.putParcelableArrayList("playerlist", new ArrayList<PlayerCharacter>(playerDataAdapter.getPlayersByGroup(groupId)));
+        playerListFragment.setArguments(b);
+        fragmentTransaction.replace(R.id.content, playerListFragment, "PlayerGroupFragment");
+        fragmentTransaction.commit();
+    }
+
+    private void startPlayerFragment(int playerId){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        PlayerCharacterFragment playerCharacterFragment= new PlayerCharacterFragment();
+        Bundle b = new Bundle();
+        PlayerDataAdapter playerDataAdapter = new PlayerDataAdapter();
+        b.putParcelable("player", playerDataAdapter.getPlayerById(playerId));
+        playerCharacterFragment.setArguments(b);
+        fragmentTransaction.replace(R.id.content, playerCharacterFragment, "PlayerGroupFragment");
         fragmentTransaction.commit();
     }
 
@@ -190,11 +224,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Group item) {
-
+        if(item != null){
+            startPlayerGroupFragment(item.getGroupId());
+        }
     }
 
     @Override
     public void onListFragmentInteraction(PlayerCharacter item) {
 
+    }
+
+    @Override
+    public void onPlayerListInteraction(PlayerCharacter item) {
+        if(item != null){
+            startPlayerFragment(item.getId());
+        }
     }
 }
