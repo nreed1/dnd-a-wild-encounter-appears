@@ -1,10 +1,13 @@
 package com.example.nreed.awildencounterappears.Classes.Objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Niki on 7/15/2017.
  */
 
-public class PlayerCharacter {
+public class PlayerCharacter implements Parcelable{
     private int Id;
     private String CharacterName;
     private String PlayerName;
@@ -68,4 +71,45 @@ public class PlayerCharacter {
     public void setGroupId(int groupId) {
         GroupId = groupId;
     }
+
+    public PlayerCharacter(){
+
+    }
+
+    public PlayerCharacter(Parcel in){
+        setId(in.readInt());
+        setCharacterName(in.readString());
+        setPlayerName(in.readString());
+        setLevel(in.readInt());
+        setArmorClass(in.readInt());
+        setDnDClass(in.readString());
+        setId(in.readInt());
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(getId());
+        parcel.writeString(getCharacterName());
+        parcel.writeString(getPlayerName());
+        parcel.writeInt(getLevel());
+        parcel.writeInt(getArmorClass());
+        parcel.writeString(getDnDClass());
+        parcel.writeInt(getGroupId());
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public PlayerCharacter createFromParcel(Parcel in) {
+            return new PlayerCharacter(in);
+        }
+
+        public PlayerCharacter[] newArray(int size) {
+            return new PlayerCharacter[size];
+        }
+    };
 }
